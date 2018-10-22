@@ -182,7 +182,7 @@ fillBreadcrumb = (restaurant=self.restaurant) => {
  */
 getParameterByName = (name, url) => {
   if (!url)
-    url = window.location.href;
+    url = window.location.href + "mws-restaurant-stage-1/";
   name = name.replace(/[\[\]]/g, '\\$&');
   const regex = new RegExp(`[?&]${name}(=([^&#]*)|&|#|$)`),
     results = regex.exec(url);
