@@ -30,7 +30,7 @@ class DBHelper {
   static fetchRestaurants(callback) {
     let xhr = new XMLHttpRequest();
     xhr.open('GET', DBHelper.DATABASE_URL);
-    shr.setRequestHeader('Content-type', 'application/javascript');
+    xhr.setRequestHeader('Content-type', 'application/javascript');
     xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
     xhr.onload = () => {
       if (xhr.status === 200) { // Got a success response from server!
