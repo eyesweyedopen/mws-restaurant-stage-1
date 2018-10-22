@@ -4,7 +4,7 @@
 
   (() => {
     if("serviceWorker" in navigator) {
-      navigator.serviceWorker.register('js/sw.js');
+      navigator.serviceWorker.register('sw.js').then((reg) => console.log(reg));
     }
 
   })();
@@ -30,6 +30,7 @@ class DBHelper {
   static fetchRestaurants(callback) {
     let xhr = new XMLHttpRequest();
     xhr.open('GET', DBHelper.DATABASE_URL);
+    shr.setRequestHeader('Content-type', 'application/javascript');
     xhr.onload = () => {
       if (xhr.status === 200) { // Got a success response from server!
         const json = JSON.parse(xhr.responseText);
