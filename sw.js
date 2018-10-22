@@ -1,1 +1,1 @@
-self.addEventListener("register", (e) => console.log("registered"));
+self.addEventListener("register", (e) => console.log("registered", e));
