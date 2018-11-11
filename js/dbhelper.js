@@ -2,12 +2,11 @@
    * Register service worker
    */
 
-  (() => {
-    if("serviceWorker" in navigator) {
-      navigator.serviceWorker.register('sw.js').then((reg) => console.log(reg));
-    }
-
-  })();
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('/sw.js');
+  });
+}
 
 
 /**
@@ -29,7 +28,8 @@ class DBHelper {
    */
   static fetchRestaurants(callback) {
     let xhr = new XMLHttpRequest();
-    xhr.open('GET', window.location.href + "data/restaurants.json");
+    let url = new URL(window.location.href);
+    xhr.open('GET', url.origin + "/data/restaurants.json");
     xhr.onload = () => {
       if (xhr.status === 200) { // Got a success response from server!
         const json = JSON.parse(xhr.responseText);
