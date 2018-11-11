@@ -16,8 +16,8 @@ self.addEventListener('install', (e) => {
     console.log(staticCacheName);
     e.waitUntil(
         caches.open(staticCacheName).then((newCache) => {
-            return newCache.add("img/*")
-                .then((r) => console.log(r))
+            return newCache.add("./img/*")
+                .then((r) => console.log("request: " + r))
                 .catch((err) => console.log(err));
         })
     );
@@ -38,7 +38,6 @@ self.addEventListener('activate', (e) => {
 });
 
 self.addEventListener('fetch', (e) => {
-    console.log(e);
     if (String(e.request).endsWith('.json')) {
         fetch(e.request).then(res => res.json()).then(json => {
             json.forEach(res => {
