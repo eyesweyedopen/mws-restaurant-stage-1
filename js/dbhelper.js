@@ -4,7 +4,7 @@
 
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', function() {
-    navigator.serviceWorker.register('mws-restaurant-stage-1/sw.js');
+    navigator.serviceWorker.register('/sw.js');
   });
 }
 
