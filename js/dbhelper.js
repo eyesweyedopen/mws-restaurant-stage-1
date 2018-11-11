@@ -181,6 +181,7 @@ class DBHelper {
    * Restaurant image URL.
    */
   static imageUrlForRestaurant(restaurant) {
+    console.log(window.location.origin);
     return (`${window.location.origin}/mws-restaurant-stage-1/img/${restaurant.photograph}`);
   }
 
