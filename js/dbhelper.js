@@ -29,7 +29,13 @@ class DBHelper {
   static fetchRestaurants(callback) {
     let xhr = new XMLHttpRequest();
     let url = new URL(window.location.href);
-    xhr.open('GET', url.origin + "/data/restaurants.json");
+    let fullUrl;
+    if (url.origin.startsWith('https://')) {
+      fullUrl = url.origin + "/mws-restaurant-stage-1/data/restaurants.json"
+    } else {
+      fullUrl = url.origin + "/data/restaurants.json"
+    }
+    xhr.open('GET', fullUrl);
     xhr.onload = () => {
       if (xhr.status === 200) { // Got a success response from server!
         const json = JSON.parse(xhr.responseText);
