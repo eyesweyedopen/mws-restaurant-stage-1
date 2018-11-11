@@ -29,31 +29,34 @@ class DBHelper {
   static fetchRestaurants(callback) {
     let xhr = new XMLHttpRequest();
     let url = new URL(window.location.href);
-    // xhr.open('GET', url.origin + "/data/restaurants.json");
-    // xhr.onload = () => {
-    //   console.log(xhr);
-    //   if (xhr.status === 200) { // Got a success response from server!
-    //     const json = JSON.parse(xhr.responseText);
-    //     const restaurants = json.restaurants;
-    //     callback(null, restaurants);
-    //   } else { // Oops!. Got an error from server.
-    //     const error = (`Request failed. Returned status of ${xhr.status}`);
-    //     callback(error, null);
-    //   }
-    // };
-    // xhr.send();
+    xhr.open('GET', url.origin + "/data/restaurants.json");
+    console.log(xhr);
+    xhr.onload = () => {
+      console.log(xhr);
+      if (xhr.status === 200) { // Got a success response from server!
+        const json = JSON.parse(xhr.responseText);
+        const restaurants = json.restaurants;
+        callback(null, restaurants);
+      } else { // Oops!. Got an error from server.
+        const error = (`Request failed. Returned status of ${xhr.status}`);
+        callback(error, null);
+      }
+    };
+    console.log(xhr);
+    xhr.send();
+    console.log(xhr);
 
-    fetch(url.origin + "/data/restaurants.json")
-      .then((res) => {if(res.status === 200) {
-        res.json()
-      } else {
-        console.log("there was an error")
-      }})
-      .catch(err=>{
-        console.error(err); 
-        callback(err, null)
-      })
-      .then(((json) => callback(null, json.restaurants)))
+    // fetch(url.origin + "/data/restaurants.json")
+    //   .then((res) => {if(res.status === 200) {
+    //     res.json()
+    //   } else {
+    //     console.log("there was an error")
+    //   }})
+    //   .catch(err=>{
+    //     console.error(err); 
+    //     callback(err, null)
+    //   })
+    //   .then(((json) => callback(null, json.restaurants)))
   }
 
   /**
@@ -186,7 +189,8 @@ class DBHelper {
     const marker = new L.marker([restaurant.latlng.lat, restaurant.latlng.lng],
       {title: restaurant.name,
       alt: restaurant.name,
-      url: DBHelper.urlForRestaurant(restaurant)
+      url: DBHelper.urlForRestaurant(restaurant),
+      keyboard: false
       })
       marker.addTo(newMap);
     return marker;
