@@ -30,9 +30,7 @@ class DBHelper {
     let xhr = new XMLHttpRequest();
     let url = new URL(window.location.href);
     xhr.open('GET', url.origin + "/data/restaurants.json");
-    console.log(xhr);
     xhr.onload = () => {
-      console.log(xhr);
       if (xhr.status === 200) { // Got a success response from server!
         const json = JSON.parse(xhr.responseText);
         const restaurants = json.restaurants;
@@ -42,9 +40,7 @@ class DBHelper {
         callback(error, null);
       }
     };
-    console.log(xhr);
     xhr.send();
-    console.log(xhr);
 
     // fetch(url.origin + "/data/restaurants.json")
     //   .then((res) => {if(res.status === 200) {

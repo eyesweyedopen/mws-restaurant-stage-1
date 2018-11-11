@@ -183,7 +183,11 @@ fillBreadcrumb = (restaurant=self.restaurant) => {
  */
 getParameterByName = (name, url) => {
   if (!url)
-    url = window.location.href;
+    if (window.location.href.startsWith('https://')) {
+      url = window.location.origin
+    } else {
+      url = window.location.href;
+    }
     console.log(name);
   name = name.replace(/[\[\]]/g, '\\$&');
   console.log(name);
