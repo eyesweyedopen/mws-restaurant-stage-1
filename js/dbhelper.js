@@ -31,6 +31,7 @@ class DBHelper {
     let url = new URL(window.location.href);
     let fullUrl;
     if (url.origin.startsWith('https://')) {
+      console.log(url.origin);
       fullUrl = url.origin + "/mws-restaurant-stage-1/data/restaurants.json"
     } else {
       fullUrl = url.origin + "/data/restaurants.json"
@@ -180,7 +181,7 @@ class DBHelper {
    * Restaurant image URL.
    */
   static imageUrlForRestaurant(restaurant) {
-    return (`/img/${restaurant.photograph}`);
+    return (`${window.location.href}img/${restaurant.photograph}`);
   }
 
   /**

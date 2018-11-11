@@ -38,6 +38,7 @@ self.addEventListener('activate', (e) => {
 });
 
 self.addEventListener('fetch', (e) => {
+    console.log(e);
     if (String(e.request).endsWith('.json')) {
         fetch(e.request).then(res => res.json()).then(json => {
             json.forEach(res => {
