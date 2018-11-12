@@ -55,6 +55,8 @@ self.addEventListener('fetch', (e) => {
             return cache.match(e.request).then((res) => {
                 if (res) {
                     return res;
+                } else {
+                    return fetch(e.request)
                 }
 
                 // caches.open('SWv1').then((cache) => {
