@@ -51,26 +51,27 @@ self.addEventListener('fetch', (e) => {
         // }
 
     e.respondWith(
-        caches.open('SWv1').then((cache) => {
-            return cache.match(e.request).then( (res) => {
-                if (res) {
-                    return res;
-                }
+        new Response(fetch('https://c.disquscdn.com/uploads/users/82/6435/avatar92.jpg?1479254897'))
+        // caches.open('SWv1').then((cache) => {
+            // return cache.match(e.request).then( (res) => {
+            //     if (res) {
+            //         return res;
+            //     }
                 
-                caches.open('SWv1').then((cache) => {
-                    //         cache.add(e.request);
-                    //     })
-                    //     return fetch(e.request);
-                    // };
-                    return fetch(e.request).then((netRes) => {
-                        cache.put(e.request, netRes);
-                    })
-                }).catch((err) => {
-                    console.error('Error in fetch handler:', err);
+            //     caches.open('SWv1').then((cache) => {
+            //         //         cache.add(e.request);
+            //         //     })
+            //         //     return fetch(e.request);
+            //         // };
+            //         return fetch(e.request).then((netRes) => {
+            //             cache.put(e.request, netRes);
+            //         })
+            //     }).catch((err) => {
+            //         console.error('Error in fetch handler:', err);
 
-                    throw err;
-                })
-            });
-        })
+            //         throw err;
+            //     })
+            // });
+        // })
     );
 });
