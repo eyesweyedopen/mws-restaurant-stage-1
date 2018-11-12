@@ -50,29 +50,28 @@ self.addEventListener('fetch', (e) => {
         //     )
         // }
 
-    if (!String(e.request).includes('mapbox')) {
-        e.respondWith(
-            caches.open('SWv1').then((cache) => {
-                return cache.match(e.request).then((res) => {
-                    if (res) {
-                        return res;
-                    }
+    e.respondWith(
+        caches.open('SWv1').then((cache) => {
+            return cache.match(e.request).then((res) => {
+                if (res) {
+                    return res;
+                }
 
-                    caches.open('SWv1').then((cache) => {
-                        //         cache.add(e.request);
-                        //     })
-                        //     return fetch(e.request);
-                        // };
-                        return fetch(e.request).then((netRes) => {
-                            cache.put(e.request, netRes);
-                        })
-                    }).catch((err) => {
-                        console.error('Error in fetch handler:', err);
+                // caches.open('SWv1').then((cache) => {
+                //     //         cache.add(e.request);
+                //     //     })
+                //     //     return fetch(e.request);
+                //     // };
+                //     return fetch(e.request).then((netRes) => {
+                //         cache.put(e.request, netRes.clone());
+                //         return netRes;
+                //     })
+                // }).catch((err) => {
+                //     console.error('Error in fetch handler:', err);
 
-                        throw err;
-                    })
-                });
-            })
-        );
-    }
+                //     throw err;
+                // })
+            });
+        })
+    );
 });
