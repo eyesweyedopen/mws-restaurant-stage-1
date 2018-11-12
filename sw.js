@@ -29,11 +29,11 @@ self.addEventListener('install', (e) => {
     ]
 
     
-    e.waitUntil(
-        caches.open(staticCacheName).then((newCache) => {
-            cacheArray.forEach(resource => newCache.add(resource))
-        })
-    );
+    // e.waitUntil(
+    //     caches.open(staticCacheName).then((newCache) => {
+    //         cacheArray.forEach(resource => newCache.add(resource))
+    //     })
+    // );
 });
 
 self.addEventListener('fetch', (e) => {
