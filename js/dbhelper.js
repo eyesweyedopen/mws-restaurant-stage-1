@@ -14,7 +14,7 @@ if ('serviceWorker' in navigator) {
 
  document.addEventListener('DOMContentLoaded', () => {
    document.querySelectorAll('.homeLink').forEach((el) => {
-     el.href = String(window.location.origin).search('localhost') ? '/' : '/mws-restaurant-stage-1'
+     el.href = String(window.location.origin).includes('localhost') ? '/' : '/mws-restaurant-stage-1'
    })
  })
 
