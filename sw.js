@@ -16,7 +16,7 @@ self.addEventListener('install', (e) => {
     console.log(staticCacheName);
     e.waitUntil(
         caches.open(staticCacheName).then((newCache) => {
-            return newCache.add("./img/*")
+            return newCache.add("/img/*")
                 .then((r) => console.log("request: " + r))
                 .catch((err) => console.log(err));
         })
