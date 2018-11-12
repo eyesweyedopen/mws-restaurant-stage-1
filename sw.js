@@ -45,6 +45,7 @@ self.addEventListener('fetch', (e) => {
                 //     return fetch(e.request);
                 // };
                     return fetch(e.request).then((netRes) => {
+                        console.log("netRes: " + netRes);
                         cache.put(e.request, netRes.clone());
                         return netRes;
                     })
