@@ -3,7 +3,7 @@
    */
 
 if ('serviceWorker' in navigator) {
-  window.addEventListener('load', function() {
+  window.addEventListener('DOMContentLoaded', function() {
     navigator.serviceWorker.register('./sw.js');
   });
 }
@@ -12,9 +12,9 @@ if ('serviceWorker' in navigator) {
  * Create consistent routing for local and hosted setups
  */
 
- document.addEventListener('DOMContentLoaded', () => {
+ document.addEventListener('load', () => {
    document.querySelectorAll('.homeLink').forEach((el) => {
-     el.href = String(window.location.origin).includes('localhost') ? window.location.origin : window.location.origin + '/mws-restaurant-stage-1'
+     el.href = String(window.location.origin).includes('localhost') ? `${window.location.origin}` : `${window.location.origin}/mws-restaurant-stage-1`
    })
  })
 
