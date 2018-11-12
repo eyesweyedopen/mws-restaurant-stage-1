@@ -30,7 +30,7 @@ self.addEventListener('install', (e) => {
     
     e.waitUntil(
         caches.open(staticCacheName).then((newCache) => {
-            return newCache.addAll(cacheArray)
+            return newCache.addAll(cacheArray.map((resource) => {return "/mws-restaurant-stage=1" + resource}))
         })
     );
 });
