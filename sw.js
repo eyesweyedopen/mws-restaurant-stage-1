@@ -1,6 +1,3 @@
-let iterObj = {iter: 0};
-let staticCacheName;
-
 self.addEventListener("register", (e) => {
     iterObj.iter = 0;
     return new Response(e, {
@@ -11,9 +8,7 @@ self.addEventListener("register", (e) => {
 });
 
 self.addEventListener('install', (e) => {
-    iterObj.iter++;
-    staticCacheName = `SWv${iterObj.iter}`;
-    console.log(staticCacheName);
+    staticCacheName = `SWv1`;
     e.waitUntil(
         caches.open(staticCacheName).then((newCache) => {
             return newCache.add("/img/*")
@@ -42,23 +37,34 @@ self.addEventListener('fetch', (e) => {
         fetch(e.request).then(res => res.json()).then(json => {
             json.forEach(res => {
                 caches.open(staticCacheName).then(cache => {
-                    cache.add(res);
+                    cache.put(e.request, res);
                 })
             })
         })
     }
 
     e.respondWith(
-        caches.match(e.request).then( (res) => {
-            // if (res) {
-            //     return res;
-            // } else {
-            //     caches.open(staticCacheName).then((cache) => {
-            //         cache.add(e.request);
-            //     })
-            //     return fetch(e.request);
-            // };
-            return res || fetch(e.request).catch(err => console.error("Eroor: ", err));
+        caches.open('SWv1').then((cache) => {
+            return cache.match(e.request).then( (res) => {
+                if (res) {
+                    return res;
+                }
+                
+                caches.open(staticCacheName).then((cache) => {
+                //         cache.add(e.request);
+                //     })
+                //     return fetch(e.request);
+                // };
+                    return fetch(e.request).then((netRes) => {
+                        cache.put(e.request, netRes.clone());
+                        return netRes;
+                    })
+                }).catch((err) => {
+                    console.error('Error in fetch handler:', err);
+                
+                    throw err;
+                });
+            });
         })
     );
 });
