@@ -18,20 +18,6 @@ self.addEventListener('install', (e) => {
     );
 });
 
-self.addEventListener('activate', (e) => {
-    e.waitUntil(
-        caches.keys().then( (cacheNames) => {
-            return Promise.all(
-                cacheNames.filter( (cacheName) => {
-                    return cacheName != staticCacheName;
-                }).map( (oldCacheName) => {
-                    return caches.delete(oldCacheName);
-                })
-            );
-        })
-    );
-});
-
 self.addEventListener('fetch', (e) => {
     if (String(e.request).endsWith('.json')) {
         fetch(e.request).then(res => res.json()).then(json => {
