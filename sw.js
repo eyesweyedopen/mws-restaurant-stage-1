@@ -11,7 +11,7 @@ self.addEventListener('install', (e) => {
     staticCacheName = `SWv1`;
     e.waitUntil(
         caches.open(staticCacheName).then((newCache) => {
-            return newCache.add("/img/*")
+            return newCache.addAll("/")
                 .then((r) => console.log("request: " + r))
                 .catch((err) => console.log(err));
         })
