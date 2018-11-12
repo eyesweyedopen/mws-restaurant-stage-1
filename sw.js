@@ -24,7 +24,7 @@ self.addEventListener('install', (e) => {
         "img/7.jpg",
         "img/8.jpg",
         "img/9.jpg",
-        "img/10.jpg",
+        "img/10.jpg"
     ]
 
     
@@ -49,7 +49,12 @@ self.addEventListener('fetch', (e) => {
         //         })
         //     )
         // }
-
+    if (e.request.includes('favicon')) {
+        e.respondWith(
+            new Response("No response")
+        )
+    }
+    
     e.respondWith(
         caches.open('SWv1').then((cache) => {
             return cache.match(e.request).then( (res) => {
