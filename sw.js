@@ -19,15 +19,17 @@ self.addEventListener('install', (e) => {
 });
 
 self.addEventListener('fetch', (e) => {
-    if (String(e.request).endsWith('.json')) {
-        fetch(e.request).then(res => res.json()).then(json => {
-            json.forEach(res => {
-                caches.open(staticCacheName).then(cache => {
-                    cache.put(e.request, res);
+        if (String(e.request).endsWith('.json')) {
+            e.waitUntil(
+                fetch(e.request).then(res => res.json()).then(json => {
+                    json.forEach(res => {
+                        caches.open(staticCacheName).then(cache => {
+                            cache.put(e.request, res);
+                        })
+                    })
                 })
-            })
-        })
-    }
+            )
+        }
 
     e.respondWith(
         caches.open('SWv1').then((cache) => {
