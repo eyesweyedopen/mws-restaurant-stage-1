@@ -4,7 +4,7 @@
 
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', function() {
-    navigator.serviceWorker.register('./sw.js');
+    navigator.serviceWorker.register('../sw.js');
   });
 }
 
@@ -15,7 +15,6 @@ if ('serviceWorker' in navigator) {
  document.addEventListener('DOMContentLoaded', () => {
    document.querySelectorAll('.homeLink').forEach((el) => {
      el.href = String(window.location.origin).search('localhost') ? '/' : '/mws-restaurant-stage-1'
-     console.log(el);
    })
  })
 
@@ -42,7 +41,6 @@ class DBHelper {
     let url = new URL(window.location.href);
     let fullUrl;
     if (url.origin.startsWith('https://')) {
-      console.log(url.origin);
       fullUrl = url.origin + "/mws-restaurant-stage-1/data/restaurants.json"
     } else {
       fullUrl = url.origin + "/data/restaurants.json"
@@ -192,7 +190,6 @@ class DBHelper {
    * Restaurant image URL.
    */
   static imageUrlForRestaurant(restaurant) {
-    console.log(window.location.origin);
     return ((String(window.location.origin).search('localhost')) ? `${window.location.origin}/img/${restaurant.photograph}` : `${window.location.origin}/mws-restaurant-stage-1/img/${restaurant.photograph}`);
   }
 

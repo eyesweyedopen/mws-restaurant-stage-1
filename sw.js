@@ -9,22 +9,27 @@ self.addEventListener("register", (e) => {
 
 self.addEventListener('install', (e) => {
     staticCacheName = `SWv1`;
+    const cacheArray = [
+        "/",
+        "./data/restaurants.json",
+        "index.html",
+        "restaurant.html",
+        "./js/main.js",
+        "./js/restaurant_info.js",
+        "./img/1.jpg",
+        "./img/2.jpg",
+        "./img/3.jpg",
+        "./img/4.jpg",
+        "./img/5.jpg",
+        "./img/6.jpg",
+        "./img/7.jpg",
+        "./img/8.jpg",
+        "./img/9.jpg",
+        "./img/10.jpg",
+    ]
+    
     e.waitUntil(
         caches.open(staticCacheName).then((newCache) => {
-            const cacheArray = [
-                "/data/restaurants.json",
-                "/img/1.jpg",
-                "/img/2.jpg",
-                "/img/3.jpg",
-                "/img/4.jpg",
-                "/img/5.jpg",
-                "/img/6.jpg",
-                "/img/7.jpg",
-                "/img/8.jpg",
-                "/img/9.jpg",
-                "/img/10.jpg",
-            ]
-
             return newCache.addAll(cacheArray)
                 .then((r) => console.log("request: " + r))
                 .catch((err) => console.log(err));
@@ -47,28 +52,32 @@ self.addEventListener('fetch', (e) => {
         // }
 
     e.respondWith(
-        caches.open('SWv1').then((cache) => {
-            return cache.match(e.request).then( (res) => {
-                if (res) {
-                    return res;
-                }
+        // caches.open('SWv1').then((cache) => {
+        //     return cache.match(e.request).then( (res) => {
+        //         if (res) {
+        //             return res;
+        //         }
                 
-                caches.open('SWv1').then((cache) => {
-                //         cache.add(e.request);
-                //     })
-                //     return fetch(e.request);
-                // };
-                    return fetch(e.request).then((netRes) => {
-                        console.log("netRes: " + netRes);
-                        cache.put(e.request, netRes.clone());
-                        return netRes;
-                    })
-                }).catch((err) => {
-                    console.error('Error in fetch handler:', err);
-                
-                    throw err;
-                });
-            });
+        //         caches.open('SWv1').then((cache) => {
+        //             //         cache.add(e.request);
+        //             //     })
+        //             //     return fetch(e.request);
+        //             // };
+        //             return fetch(e.request).then((netRes) => {
+        //                 console.log("netRes: " + netRes);
+        //                 cache.put(e.request, netRes.clone());
+        //                 return netRes;
+        //             })
+        //         }).catch((err) => {
+        //             console.error('Error in fetch handler:', err);
+
+        //             throw err;
+        //         })
+        //     });
+        // })
+
+        caches.match(e.request).then((res) => {
+            return res || fetch(e.request);
         })
     );
 });
