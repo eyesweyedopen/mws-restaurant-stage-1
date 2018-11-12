@@ -24,7 +24,7 @@ self.addEventListener('install', (e) => {
                 "/img/9.jpg",
                 "/img/10.jpg",
             ]
-            
+
             return newCache.addAll(cacheArray)
                 .then((r) => console.log("request: " + r))
                 .catch((err) => console.log(err));
@@ -53,7 +53,7 @@ self.addEventListener('fetch', (e) => {
                     return res;
                 }
                 
-                caches.open(staticCacheName).then((cache) => {
+                caches.open('SWv1').then((cache) => {
                 //         cache.add(e.request);
                 //     })
                 //     return fetch(e.request);
