@@ -27,10 +27,13 @@ self.addEventListener('install', (e) => {
         "/img/9.jpg",
         "/img/10.jpg",
     ]
-    
+
+    const modArray = cacheArray.map((resource) => { return "/mws-restaurant-stage=1" + resource })
+    console.log(modArray)
+
     e.waitUntil(
         caches.open(staticCacheName).then((newCache) => {
-            return newCache.addAll(cacheArray.map((resource) => {return "/mws-restaurant-stage=1" + resource}))
+            return newCache.addAll(modArray)
         })
     );
 });
