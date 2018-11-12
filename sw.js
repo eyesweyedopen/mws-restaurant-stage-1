@@ -49,12 +49,12 @@ self.addEventListener('fetch', (e) => {
         //         })
         //     )
         // }
-    if (e.request.includes('favicon')) {
+    if (String(e.request).includes('favicon')) {
         e.respondWith(
             new Response("No response")
         )
     }
-    
+
     e.respondWith(
         caches.open('SWv1').then((cache) => {
             return cache.match(e.request).then( (res) => {
