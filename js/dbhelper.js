@@ -14,7 +14,7 @@ if ('serviceWorker' in navigator) {
 
  document.addEventListener('DOMContentLoaded', () => {
    document.querySelectorAll('.homeLink').forEach((el) => {
-     el.href = String(window.location.origin).includes('localhost') ? '/' : '/mws-restaurant-stage-1'
+     el.href = String(window.location.origin).includes('localhost') ? window.location.origin : window.location.origin + '/mws-restaurant-stage-1'
    })
  })
 
