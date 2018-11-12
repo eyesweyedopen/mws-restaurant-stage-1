@@ -16,7 +16,7 @@ self.addEventListener('install', (e) => {
         "/restaurant.html",
         "/js/main.js",
         "/js/restaurant_info.js",
-        "/mws-restaurant-stage-1/img/1.jpg",
+        "/img/1.jpg",
         "/img/2.jpg",
         "/img/3.jpg",
         "/img/4.jpg",
@@ -29,11 +29,11 @@ self.addEventListener('install', (e) => {
     ]
 
     
-    // e.waitUntil(
-    //     caches.open(staticCacheName).then((newCache) => {
-    //         cacheArray.forEach(resource => newCache.add(resource))
-    //     })
-    // );
+    e.waitUntil(
+        caches.open(staticCacheName).then((newCache) => {
+            return newCache.addAll(cacheArray)
+        })
+    );
 });
 
 self.addEventListener('fetch', (e) => {
@@ -51,27 +51,26 @@ self.addEventListener('fetch', (e) => {
         // }
 
     e.respondWith(
-        new Response(fetch('https://c.disquscdn.com/uploads/users/82/6435/avatar92.jpg?1479254897'))
-        // caches.open('SWv1').then((cache) => {
-            // return cache.match(e.request).then( (res) => {
-            //     if (res) {
-            //         return res;
-            //     }
+        caches.open('SWv1').then((cache) => {
+            return cache.match(e.request).then( (res) => {
+                if (res) {
+                    return res;
+                }
                 
-            //     caches.open('SWv1').then((cache) => {
-            //         //         cache.add(e.request);
-            //         //     })
-            //         //     return fetch(e.request);
-            //         // };
-            //         return fetch(e.request).then((netRes) => {
-            //             cache.put(e.request, netRes);
-            //         })
-            //     }).catch((err) => {
-            //         console.error('Error in fetch handler:', err);
+                caches.open('SWv1').then((cache) => {
+                    //         cache.add(e.request);
+                    //     })
+                    //     return fetch(e.request);
+                    // };
+                    return fetch(e.request).then((netRes) => {
+                        cache.put(e.request, netRes);
+                    })
+                }).catch((err) => {
+                    console.error('Error in fetch handler:', err);
 
-            //         throw err;
-            //     })
-            // });
-        // })
+                    throw err;
+                })
+            });
+        })
     );
 });
