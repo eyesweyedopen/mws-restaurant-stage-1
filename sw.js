@@ -15,25 +15,23 @@ self.addEventListener('install', (e) => {
         "/index.html",
         "/restaurant.html",
         "/js/main.js",
-        "/js/restaurant_info.js",
-        "/img/1.jpg",
-        "/img/2.jpg",
-        "/img/3.jpg",
-        "/img/4.jpg",
-        "/img/5.jpg",
-        "/img/6.jpg",
-        "/img/7.jpg",
-        "/img/8.jpg",
-        "/img/9.jpg",
-        "/img/10.jpg",
+        "/js/restaurant_info.js"
+        // "/img/1.jpg",
+        // "/img/2.jpg",
+        // "/img/3.jpg",
+        // "/img/4.jpg",
+        // "/img/5.jpg",
+        // "/img/6.jpg",
+        // "/img/7.jpg",
+        // "/img/8.jpg",
+        // "/img/9.jpg",
+        // "/img/10.jpg",
     ]
 
-    const modArray = cacheArray.map((resource) => { return "/mws-restaurant-stage=1" + resource })
-    console.log(modArray)
-
+    
     e.waitUntil(
         caches.open(staticCacheName).then((newCache) => {
-            return newCache.addAll(modArray)
+            return newCache.addAll(cacheArray)
         })
     );
 });
