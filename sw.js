@@ -56,7 +56,6 @@ self.addEventListener('fetch', (e) => {
                 if (res) {
                     return res;
                 }
-                console.log(e.request);
                 
                 caches.open('SWv1').then((cache) => {
                     //         cache.add(e.request);
@@ -64,7 +63,6 @@ self.addEventListener('fetch', (e) => {
                     //     return fetch(e.request);
                     // };
                     return fetch(e.request).then((netRes) => {
-                        console.log("netRes: " + netRes);
                         cache.put(e.request, netRes);
                     })
                 }).catch((err) => {
