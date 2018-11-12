@@ -45,6 +45,7 @@ class DBHelper {
     } else {
       fullUrl = url.origin + "/data/restaurants.json"
     }
+    console.log(fullUrl);
     xhr.open('GET', fullUrl);
     xhr.onload = () => {
       if (xhr.status === 200) { // Got a success response from server!
