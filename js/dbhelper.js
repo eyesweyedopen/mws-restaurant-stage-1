@@ -12,7 +12,7 @@ if ('serviceWorker' in navigator) {
  * Create consistent routing for local and hosted setups
  */
 
- document.addEventListener('load', () => {
+ document.addEventListener('DOMContentLoaded', () => {
    document.querySelectorAll('.homeLink').forEach((el) => {
      el.href = String(window.location.origin).includes('localhost') ? `${window.location.origin}` : `${window.location.origin}/mws-restaurant-stage-1`
    })
