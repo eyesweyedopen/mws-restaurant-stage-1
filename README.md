@@ -10,12 +10,14 @@ Welcome to the Restaurant Reviews App!  Here you will be able to search for a se
 
 * Locally:
 
-- Clone this repository
-- `cd` into the repository
-- run `python -m SimpleHTTPServer <port number>` if you have Python 2 installed
-- run `python3 -m http.server <port number>` if you have Python 3 installed
-- enter `localhost:<port number>` into your favorite browser
-- enjoy!
+    - Clone this repository
+    - `cd` into the repository
+    - run `python -m SimpleHTTPServer <port number>` if you have Python 2 installed
+    - run `python3 -m http.server <port number>` if you have Python 3 installed
+    - enter `localhost:<port number>` into your favorite browser
+    - enjoy!
 
 * Remotely
 
+    - enter `https://eyesweyedopen.github.io/mws-restaurant-stage-1/` in your favorite browser
+    - enjoy!
