@@ -30,9 +30,10 @@ self.addEventListener('install', (e) => {
 
     
     e.waitUntil(
-        caches.open(staticCacheName).then((newCache) => {
-            return newCache.addAll(cacheArray)
-        })
+        caches.open(staticCacheName)
+            // .then((newCache) => {
+            //     return newCache.addAll(cacheArray)
+            // })
     );
 });
 
