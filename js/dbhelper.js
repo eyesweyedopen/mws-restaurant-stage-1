@@ -190,8 +190,8 @@ class DBHelper {
   /**
    * Restaurant image URL.
    */
-  static imageUrlForRestaurant(restaurant) {
-    return ((String(window.location.origin).includes('localhost')) ? `${window.location.origin}/img/${restaurant.photograph}` : `${window.location.origin}/mws-restaurant-stage-1/img/${restaurant.photograph}`);
+  static imageUrlForRestaurant(restaurant, origin=window.location.origin) {
+    return ((String(origin).includes('localhost')) ? `${origin}/img/${restaurant.photograph}` : `${window.location.origin}/mws-restaurant-stage-1/img/${restaurant.photograph}`);
   }
 
   /**
