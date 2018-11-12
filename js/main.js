@@ -4,8 +4,6 @@ let restaurants,
 var newMap
 var markers = []
 
-document.addEventListener('focus', (e) => console.log(e.target));
-
 /**
  * Fetch neighborhoods and cuisines as soon as the page is loaded.
  */

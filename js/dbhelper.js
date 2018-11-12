@@ -8,6 +8,17 @@ if ('serviceWorker' in navigator) {
   });
 }
 
+/*
+ * Create consistent routing for local and hosted setups
+ */
+
+ document.addEventListener('DOMContentLoaded', () => {
+   document.querySelectorAll('.homeLink').forEach((el) => {
+     el.href = String(window.location.origin).search('localhost') ? '/' : '/mws-restaurant-stage-1'
+     console.log(el);
+   })
+ })
+
 
 /**
  * Common database helper functions.
@@ -182,7 +193,7 @@ class DBHelper {
    */
   static imageUrlForRestaurant(restaurant) {
     console.log(window.location.origin);
-    return (`${window.location.origin}/mws-restaurant-stage-1/img/${restaurant.photograph}`);
+    return ((String(window.location.origin).search('localhost')) ? `${window.location.origin}/img/${restaurant.photograph}` : `${window.location.origin}/mws-restaurant-stage-1/img/${restaurant.photograph}`);
   }
 
   /**
